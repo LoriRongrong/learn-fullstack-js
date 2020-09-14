@@ -1,8 +1,12 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
 
-ReactDOM.render(
-  React.createElement('h2',null,'Hello React'),
-  
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById("root"));
+
+// setTimeout(()=>{
+//     ReactDOM.render(
+//         <h2>what are you looking at???</h2>,
+//         document.getElementById('root')
+//     );
+// },4000);
