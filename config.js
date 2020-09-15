@@ -10,7 +10,11 @@ const logStars = function(message) {
 };
 exports.logStars = logStars;
 
-const port = {
-  port: env.PORT || 8080
+export default {
+  port: env.PORT || 8080,
+  host: env.HOST || '0.0.0.0',
+  get serverUrl(){
+    return `http:/${this.host}:${this.port}`;
+  }
 };
-exports.default = port;
+
