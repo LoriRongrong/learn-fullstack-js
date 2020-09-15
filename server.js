@@ -6,6 +6,15 @@ const express = require("express");
 // import express from "express";
 const server = express();
 
+import sassMiddleware from "node-sass-middleware";
+const path = require("path");
+
+server.use(
+  sassMiddleware({
+    src: path.join(__dirname, "sass"),
+    dest: path.join(__dirname, "public"),
+  })
+);
 server.set("view engine", "ejs");
 
 server.get("/", (req, res) => {

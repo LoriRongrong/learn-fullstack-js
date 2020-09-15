@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-
-ReactDOM.render(<App />, document.getElementById("root"));
+import data from './testData';
+ReactDOM.render(<App/>, document.getElementById("root"));
 
 // setTimeout(()=>{
 //     ReactDOM.render(
