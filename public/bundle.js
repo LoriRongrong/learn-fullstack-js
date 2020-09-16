@@ -22785,24 +22785,19 @@
 	    };
 	    return _this;
 	  }
+	  // componentDidMount() {
+	  //   // ajax ...
+	  //   // axios
+	  //   //   .get("/api/contests")
+	  //   //   .then((resp) => {
+	  //   //     this.setState({
+	  //   //       contests: resp.data.contests,
+	  //   //     });
+	  //   //   })
+	  //   //   .catch(console.error);
+	  // }
 	
 	  _createClass(App, [{
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      // ajax ...
-	      // axios
-	      //   .get("/api/contests")
-	      //   .then((resp) => {
-	      //     this.setState({
-	      //       contests: resp.data.contests,
-	      //     });
-	      //   })
-	      //   .catch(console.error);
-	    }
-	  }, {
-	    key: "componentWillUnmount",
-	    value: function componentWillUnmount() {}
-	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -24714,7 +24709,7 @@
   \***************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24739,8 +24734,8 @@
 	var ContestList = function ContestList(_ref) {
 	  var contests = _ref.contests;
 	  return _react2.default.createElement(
-	    'div',
-	    { className: 'ContestList' },
+	    "div",
+	    { className: "ContestList" },
 	    contests.map(function (contest) {
 	      return _react2.default.createElement(_ContestPreview2.default, _extends({ key: contest.id }, contest));
 	    })

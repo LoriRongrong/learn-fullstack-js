@@ -11,19 +11,17 @@ class App extends React.Component {
       contests: this.props.initialContests,
     };
   }
-  componentDidMount() {
-    // ajax ...
-    // axios
-    //   .get("/api/contests")
-    //   .then((resp) => {
-    //     this.setState({
-    //       contests: resp.data.contests,
-    //     });
-    //   })
-    //   .catch(console.error);
-  }
-
-  componentWillUnmount() {}
+  // componentDidMount() {
+  //   // ajax ...
+  //   // axios
+  //   //   .get("/api/contests")
+  //   //   .then((resp) => {
+  //   //     this.setState({
+  //   //       contests: resp.data.contests,
+  //   //     });
+  //   //   })
+  //   //   .catch(console.error);
+  // }
   
   render() {
     return (
