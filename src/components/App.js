@@ -1,6 +1,6 @@
 import Header from "./Header";
 import React from "react";
-import ContestPreview from "./ContestPreview";
+import ContestList from './ContestList';
 
 
 class App extends React.Component {
@@ -29,13 +29,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header message={this.state.pageHeader} />
-
-        <div>
-          {/* everytime have a map call, need a unique key */}
-          {this.state.contests.map((contest) => (
-            <ContestPreview key={contest.id} {...contest} />
-          ))}
-        </div>
+        <ContestList contests={this.state.contests} />
       </div>
     );
   }
