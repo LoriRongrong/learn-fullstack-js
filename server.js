@@ -19,7 +19,7 @@ server.set("view engine", "ejs");
 
 import serverRender from "./serverRender";
 
-server.get("/", (req, res) => {
+server.get(["/", "contest/:contestId"], (req, res) => {
   serverRender()
     .then((content) => {
       res.render("index", {

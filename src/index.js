@@ -8,7 +8,7 @@ axios
   .get("/api/contests")
   .then((resp) => {
     ReactDOM.render(
-      <App initialContests={resp.data.contests} />,
+      <App initialData={resp.data} />,
       document.getElementById("root")
     );
   })
