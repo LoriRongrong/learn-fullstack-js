@@ -3,18 +3,18 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: __dirname + "/public",
+    path: path.resolve("public"),
     filename: "bundle.js",
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
-      },
-      {
-        test: /\.json$/,
-        loader: "json-loader",
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          
+        },
       },
     ],
   },
