@@ -1,17 +1,48 @@
 // fetch data from api
-import config from "./config";
-import axios from "axios";
 import React from "react";
-import ReactDomServer from "react-dom/server";
+import ReactDOMServer from "react-dom/server";
 
 import App from "./src/components/App";
 
-// cannot use relative path because this is not front-end
-// should read from config
-const serverRender = () =>
-  axios.get(`${config.serverUrl}/api/contests`).then((resp) => {
-    return ReactDomServer.renderToString(
-      <App initialData={resp.data} />
-    );
+import config from "./config";
+import axios from "axios";
+
+const getApiUrl = (contestId) => {
+  // console.log("getapiurl working fine", contestId);
+  // console.log(contestId);
+  if (contestId) {
+    return `${config.serverUrl}/api/contests/${contestId}`;
+  }
+  return `${config.serverUrl}/api/contests`;
+};
+
+const getInitialData = (contestId, apiData) => {
+  // console.log("getInitialData");
+  // console.log(contestId);
+  if (contestId) {
+    return {
+      currentContestId: apiData.id,
+      contests: {
+        [apiData.id]: apiData,
+      },
+    };
+  }
+  return {
+    contests: apiData.contests,
+  };
+};
+
+const serverRender = (contestId) =>
+  axios.get(getApiUrl(contestId)).then((resp) => {
+    // console.log(resp.data);
+    const initialData = getInitialData(contestId, resp.data);
+    // console.log(initialData);
+    return {
+      initialMarkup: ReactDOMServer.renderToString(
+        <App initialData={initialData} />
+      ),
+      initialData,
+    };
   });
+
 export default serverRender;
