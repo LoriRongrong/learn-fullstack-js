@@ -6,36 +6,30 @@ import * as api from "../api";
 import PropTypes from "prop-types";
 const pushState = (obj, url) => window.history.pushState(obj, "", url);
 
+const onPopState = (handler) => {
+  window.onpopstate = handler;
+};
+
 class App extends React.Component {
   static propTypes = {
     initialData: PropTypes.object.isRequired,
   };
-  constructor(props) {
-    super(props);
-    this.state = this.props.initialData;
-    // console.log(this.state);
-    this.currentContent = this.currentContent.bind(this);
+  state = this.props.initialData;
+  componentDidMount() {
+    onPopState((event) => {
+      this.setState({
+        currentContestId: (event.state || {}).currentContestId,
+      });
+    });
   }
-  // componentDidMount() {
-
-  // }
-  // componentDidMount() {
-  //   // ajax ...
-  //   // axios
-  //   //   .get("/api/contests")
-  //   //   .then((resp) => {
-  //   //     this.setState({
-  //   //       contests: resp.data.contests,
-  //   //     });
-  //   //   })
-  //   //   .catch(console.error);
-  // }
+  componentWillUnmount() {
+    onPopState(null);
+  }
   fetchContest = (contestId) => {
     pushState({ currentContestId: contestId }, `/contest/${contestId}`);
-    api.fetchContest(contestId).then((contest) => {
+    api.fetchContest(contestId).then((contest) => { 
       this.setState({
         currentContestId: contest.id,
-
         contests: {
           ...this.state.contests,
           [contest.id]: contest,

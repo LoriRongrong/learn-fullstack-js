@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
 import axios from "axios";
-import Data from "./testData";
 // console.log(Data);
 axios
   .get("/api/contests")

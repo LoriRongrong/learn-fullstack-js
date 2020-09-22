@@ -1,21 +1,40 @@
-const express = require("express");
+import express from "express";
+import {MongoClient} from 'mongodb';
+import assert from 'assert';
+import config from '../config';
+
+let mdb;
+MongoClient.connect(config.mongodbUri, (err, client)=>{
+  assert.equal(null, err);
+  mdb = client.db();
+});
 
 const router = express.Router();
-import data from "../src/testData";
 
-const contests = data.contests.reduce((obj, contest) => {
-  obj[contest.id] = contest;
-  return obj;
-}, {});
 router.get("/contests", (req, res) => {
-  res.send({ contests: contests });
+  let contests = {};
+  mdb.collection('contests').find({})
+  .project({
+    id: 1,
+    categoryName: 1,
+    contestName: 1
+  })
+  .each((err, contest)=>{
+    assert.equal(null,err);
+
+    if (!contest) {
+      res.send(contests);
+      return;
+    }
+    contests[contest.id] = contest;
+  });
 });
 
 router.get("/contests/:contestId", (req, res) => {
-  // this will give the contest obj
-  let contest = contests[req.params.contestId];
-  contest.description = "Lori is a happy human being";
-  res.send(contest);
+  mdb.collection('contests')
+  .findOne({id: Number(req.params.contestId)})
+  .then(contest => res.send(contest))
+  .catch(console.error);
 });
 
 module.exports = router;
